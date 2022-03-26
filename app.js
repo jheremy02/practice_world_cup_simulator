@@ -31,7 +31,7 @@ class Tournament {
     
     ]
 
-        
+        this.matchDaySchedule=[]
     
         this.results={}
         this.fixture
@@ -100,6 +100,10 @@ class Tournament {
 
     }
 
+    scheduleKnockoutRound(){
+
+    }
+
     cross_teams(bombo1,bombo2) {
         
         // sortear los equipos en 2 bombos
@@ -142,12 +146,28 @@ class Tournament {
             })
 
     }
+
+    generateGoals(){
+        return Math.floor(Math.random() * 10);
+    }
+
+    play(match) {
+        const team01Goals=this.generateGoals();
+        const team02Goals=this.generateGoals();
+
+        return {
+            team01Name:match.team01,
+            team01Goals,
+            team02Name:match.team02,
+            team02Goals
+        }
+    }
+
+    
 }
 
 
 
 let world_cup= new Tournament('World Cup',teams);
 
-
-
-console.log(world_cup.createKnockoutRound())
+world_cup.createKnockoutRound()

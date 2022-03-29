@@ -8,6 +8,7 @@ let knockoutRound=[]
 let schedulePhases=[]
 
 
+
 const phases=[{name:'octavos de final',numberMatches:8},
                    {name:'cuartos de final',numberMatches:4},
                    {name:'semifinal',numberMatches:2},
@@ -107,15 +108,24 @@ function setTeamCrossing(bombos) {
 
 //funcion para jugar cada partido
 function play(match) {
-    const team01Goals=this.generateGoals();
-    const team02Goals=this.generateGoals();
+    
+    const team01Goals=generateGoals();
+    const team02Goals=generateGoals();
 
-    return {
-        team01Name:match.team01,
-        team01Goals,
-        team02Name:match.team02,
-        team02Goals
-    }
+    while (true) {
+
+        if (team01Goals!=team02Goals) {
+            
+            return {
+                team01Name:match.team01,
+                team01Goals,
+                team02Name:match.team02,
+                team02Goals
+            }
+        }
+        
+
+    }   
 }
 
 
@@ -149,17 +159,7 @@ function generateGoals(){
     return Math.floor(Math.random() * 10);
 }
 
-function play(match) {
-    const team01Goals=generateGoals();
-    const team02Goals=generateGoals();
 
-    return {
-        team01Name:match.team01,
-        team01Goals,
-        team02Name:match.team02,
-        team02Goals
-    }
-}
 
 
 
@@ -171,17 +171,36 @@ for (const round of schedulePhases) {
     setTeamCrossing(round)
     
     const matchRoundSummary={
-        results:[]
+        results:[],
+        classified:[]
     }
 
     for (const match  of round) {
         const result=play(match)
+        const classified_team=get_classified_team(result)
+        matchRoundSummary.classified.push(classified_team)
         matchRoundSummary.results.push(result)
     }
 
+
+    
     
     console.log(matchRoundSummary)
     break
 
 }
 
+
+function get_classified_team(result) {
+    const team01=teams.find(team=>team===result.team01Name);
+    const team02=teams.find(team=>team===result.team02Name);
+
+    //evaluamos quienes han ganado y clasificado a la siguiente ronda
+        // la funcion play devolvera partido con marcador diferente y ya evalua el empate
+    if (result.team01Goals > result.team02Goals ) {
+        return team01
+
+    } else if (result.team01Goals < result.team02Goals) {
+        return team02
+    }
+}

@@ -129,13 +129,13 @@ generateGoals(){
 
 start() {
     let i=0;
-
+    let j=0;
 // recorrermos cada fase y sorteamos los cruces con los equipos clasificados
 
 for (const round of this.schedulePhases) {
 
-    
-
+    console.log(this.phases[j].name)
+    j++;
     if (this.summaries.length==0) {
 
     let bombos=this.draw_teams(this.teams);
@@ -148,6 +148,7 @@ for (const round of this.schedulePhases) {
     this.setTeamCrossing(bombos,round)
         i++
     }
+
 
 
     const matchRoundSummary={
@@ -166,11 +167,29 @@ for (const round of this.schedulePhases) {
     }
 
     
+
     console.log(matchRoundSummary)
     this.summaries.push(matchRoundSummary)
+
+    
+    if (matchRoundSummary.classified.length==2) {
+        this.play_third_place()
+    }
+
+
     
 }
 }
+
+
+play_third_place () {
+    
+    const lastIndex=this.summaries.length-1
+    let loserTeams=this.summaries[lastIndex-1].classified.filter(team=>this.summaries[lastIndex].classified.indexOf(team)===-1)
+    console.log('>===========<')
+    
+}
+
 
 
 get_classified_team(result) {

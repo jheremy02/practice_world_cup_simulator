@@ -7,7 +7,7 @@ let knockoutRound=[]
 
 let schedulePhases=[]
 
-
+let summaries=[]
 
 const phases=[{name:'octavos de final',numberMatches:8},
                    {name:'cuartos de final',numberMatches:4},
@@ -73,37 +73,7 @@ function draw_teams(teams){
 
 }
 
-let bombos=draw_teams(teams);
 
-console.log(bombos)
-
-
-
-
-
-
-// cruzar equipos para disputar partidos
-function setTeamCrossing(bombos) {
-    
-    let teamIndex=bombos[0].length-1
-    console.log(teamIndex)
-    
-    // definir cruzes por sorteo en octavos de final
-    knockoutRound[0].forEach( function (match,matchIndex) {
-            
-            match.team01=bombos[0][teamIndex];
-            teamIndex--
-        })
-    
-    teamIndex=bombos[1].length-1
-
-    knockoutRound[0].forEach( function (match,matchIndex) {
-            
-            match.team02=bombos[1][teamIndex];
-            teamIndex--
-        })
-
-}
 
 
 //funcion para jugar cada partido
@@ -131,12 +101,12 @@ function play(match) {
 
 
 //funcion para definir cruces de equipos
-function setTeamCrossing(round) {
+function setTeamCrossing(bombos,round) {
     
     let teamIndex=bombos[0].length-1
     console.log(teamIndex)
     
-    // definir cruzes por sorteo en octavos de final
+    // definir cruzes por sorteo en cada fase
     round.forEach( function (match,matchIndex) {
             
             match.team01=bombos[0][teamIndex];
@@ -154,26 +124,41 @@ function setTeamCrossing(round) {
 }
 
 
-
 function generateGoals(){
     return Math.floor(Math.random() * 10);
 }
 
 
 
-
+let i=0;
 
 // recorrermos cada fase y sorteamos los cruces con los equipos clasificados
 
 for (const round of schedulePhases) {
 
+    console.log("Hello world")
 
-    setTeamCrossing(round)
+    if (summaries.length==0) {
+
+    let bombos=draw_teams(teams);
     
+    setTeamCrossing(bombos,round)
+    
+    } else {
+    
+    let bombos=draw_teams(summaries[i].classified);
+    setTeamCrossing(bombos,round)
+        i++
+    }
+
+
     const matchRoundSummary={
         results:[],
         classified:[]
     }
+
+
+  
 
     for (const match  of round) {
         const result=play(match)
@@ -182,12 +167,10 @@ for (const round of schedulePhases) {
         matchRoundSummary.results.push(result)
     }
 
-
-    
     
     console.log(matchRoundSummary)
-    break
-
+    summaries.push(matchRoundSummary)
+    
 }
 
 

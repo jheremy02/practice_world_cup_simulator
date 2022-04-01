@@ -1,3 +1,4 @@
+
 class WorldCup {
     
 
@@ -10,6 +11,7 @@ class WorldCup {
         this.phases=[{name:'octavos de final',numberMatches:8},
                     {name:'cuartos de final',numberMatches:4},
                     {name:'semifinal',numberMatches:2},
+                    {name:'tercer y cuarto puesto', numberMatches:1},
                     {name:'final',numberMatches:1}]
 
         this.initSchedule(this.phases)
@@ -57,11 +59,13 @@ shuffleArray (array) {
 // sortear equipos en 2 bombos
 draw_teams(teams){
 
-    this.shuffleArray(teams)
+    const teamsTemp=[...teams]
+
+    this.shuffleArray(teamsTemp)
     
-    let bombo1 = [...teams.slice(0,teams.length/2)]
+    let bombo1 = [...teamsTemp.slice(0,teamsTemp.length/2)]
     
-    let bombo2 = [...teams.slice(teams.length/2)]
+    let bombo2 = [...teamsTemp.slice(teamsTemp.length/2)]
     
     return [bombo1,bombo2]
 
@@ -98,11 +102,9 @@ setTeamCrossing(bombos,round) {
     
     let teamIndex=bombos[0].length -1
     
-    
     // definir cruzes por sorteo en cada fase
     round.forEach( function (match,matchIndex) {
             
-
             
             match.team01=bombos[0][teamIndex];
             teamIndex--
@@ -135,13 +137,16 @@ start() {
 for (const round of this.schedulePhases) {
 
     
-    j++;
+    
     if (this.summaries.length==0) {
 
     let bombos=this.draw_teams(this.teams);
     
     this.setTeamCrossing(bombos,round)
     
+    } else if (j==this.schedulePhases.length-2){
+        let bombos=this.draw_teams(this.play_third_place());
+        this.setTeamCrossing(bombos,round)
     } else {
     
     let bombos=this.draw_teams(this.summaries[i].classified);
@@ -149,45 +154,37 @@ for (const round of this.schedulePhases) {
         i++
     }
 
-
-
     const matchRoundSummary={
         results:[],
         classified:[]
     }
 
 
-  
     //recorremos cada partido de cada fase
     for (const match  of round) {
         const result=this.play(match)
         const classified_team=this.get_classified_team(result)
-        matchRoundSummary.classified.push(classified_team)
         matchRoundSummary.results.push(result)
+        matchRoundSummary.classified.push(classified_team)
+        
     }
 
     
-
     this.summaries.push(matchRoundSummary)
 
-    
-    if (matchRoundSummary.classified.length==2) {
-        this.play_third_place()
-    }
-
-
+    j++;
     
 }
 }
 
-
+//metodo para obtener los perdedores de las semifinales y jugar el tercer y cuarto puesto
 play_third_place () {
     
     const lastIndex=this.summaries.length-1
     let loserTeams=this.summaries[lastIndex-1].classified.filter(team=>this.summaries[lastIndex].classified.indexOf(team)===-1)
     const match={team01:loserTeams[0],team02:loserTeams[1]}
     let result=this.play(match)
-    
+    return loserTeams
 }
 
 
@@ -211,14 +208,26 @@ get_classified_team(result) {
 let teams=['Brasil', 'Ecuador', 'Japón', 'Francia', 'EEUU', 'Inglaterra', 'Argentina', 'Holanda',
 'Alemania', 'Islas Feroe', 'España', 'Jamaica', 'Portugal', 'Polonia', 'Suecia',
 'Finlandia']
-let qatar= new WorldCup('Qatar',teams)
-qatar.start()
 
+
+let qatar= new WorldCup('Qatar',teams)
+
+// se juegan los partidos de la fase eliminatoria
+qatar.start()
+console.log('=============================')
+console.log('Inicio de la fase de eliminación')
+console.log('=============================')
+
+// se mostrara los resultados, los clasificados y el campeòn
 qatar.summaries.forEach((summary,roundIndex)=>{
     console.log('\n============')
     console.log(qatar.phases[roundIndex].name)
     console.log('============')
-    summary.results.forEach((result)=>{
-        console.log(`${result.team01Name} ${result.team01Goals} - ${result.team02Goals} ${result.team02Name}`)
+    summary.results.forEach((result,matchIndex)=>{
+        console.log(`${result.team01Name} ${result.team01Goals} - ${result.team02Goals} ${result.team02Name} ===> ${summary.classified[matchIndex]}`)
+       if (roundIndex==qatar.summaries.length-1) {
+           console.log(`\n ${summary.classified[matchIndex]} campeón del mundo !!!!!!`)
+       }
     } )
 })
+

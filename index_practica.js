@@ -60,9 +60,9 @@ draw_teams(teams){
     this.shuffleArray(teams)
     
     let bombo1 = [...teams.slice(0,teams.length/2)]
-    console.log(bombo1)
+    
     let bombo2 = [...teams.slice(teams.length/2)]
-    console.log(bombo2)
+    
     return [bombo1,bombo2]
 
 }
@@ -134,7 +134,7 @@ start() {
 
 for (const round of this.schedulePhases) {
 
-    console.log(this.phases[j].name)
+    
     j++;
     if (this.summaries.length==0) {
 
@@ -168,7 +168,6 @@ for (const round of this.schedulePhases) {
 
     
 
-    console.log(matchRoundSummary)
     this.summaries.push(matchRoundSummary)
 
     
@@ -186,7 +185,8 @@ play_third_place () {
     
     const lastIndex=this.summaries.length-1
     let loserTeams=this.summaries[lastIndex-1].classified.filter(team=>this.summaries[lastIndex].classified.indexOf(team)===-1)
-    console.log('>===========<')
+    const match={team01:loserTeams[0],team02:loserTeams[1]}
+    let result=this.play(match)
     
 }
 
@@ -213,3 +213,12 @@ let teams=['Brasil', 'Ecuador', 'Japón', 'Francia', 'EEUU', 'Inglaterra', 'Arge
 'Finlandia']
 let qatar= new WorldCup('Qatar',teams)
 qatar.start()
+
+qatar.summaries.forEach((summary,roundIndex)=>{
+    console.log('\n============')
+    console.log(qatar.phases[roundIndex].name)
+    console.log('============')
+    summary.results.forEach((result)=>{
+        console.log(`${result.team01Name} ${result.team01Goals} - ${result.team02Goals} ${result.team02Name}`)
+    } )
+})

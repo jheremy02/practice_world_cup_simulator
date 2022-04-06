@@ -1,5 +1,5 @@
 # World Cup Simulator
-simulador de playoff de  la copa del mundo de fútbol.
+Simulador de playoff de  la copa del mundo de fútbol.
 
 La fase de eliminatorias la jugarán  16 equipos de forma aleatoria
 

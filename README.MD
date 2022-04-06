@@ -17,41 +17,45 @@ Los equipos ganadores de las semifinales, pasarán a la final y los equipos perd
 Inicio de la fase de eliminación
 =============================
 
+Equipos que participarán en la fase de eliminatorias :
+
+Brasil,Ecuador,Japón,Francia,EEUU,Inglaterra,Argentina,Holanda,Alemania,Islas Feroe,España,Jamaica,Portugal,Polonia,Suecia,Finlandia
+
 ============
 octavos de final
 ============
-Inglaterra 4 - 3 Japón ===> Inglaterra
-Jamaica 1 - 9 Finlandia ===> Finlandia
-Islas Feroe 8 - 4 Portugal ===> Islas Feroe
-España 8 - 0 Francia ===> España
-Ecuador 5 - 6 Alemania ===> Alemania
-Suecia 5 - 2 Holanda ===> Suecia
-Argentina 3 - 9 Polonia ===> Polonia
-Brasil 0 - 3 EEUU ===> EEUU
+Islas Feroe 1 - 5 Inglaterra ===> Inglaterra
+Portugal 4 - 5 Jamaica ===> Jamaica
+Suecia 8 - 6 España ===> Suecia
+Argentina 5 - 7 Japón ===> Japón
+Brasil 2 - 8 EEUU ===> EEUU
+Polonia 1 - 6 Alemania ===> Alemania
+Francia 1 - 8 Finlandia ===> Finlandia
+Holanda 9 - 5 Ecuador ===> Holanda
 
 ============
 cuartos de final
 ============
-Polonia 5 - 6 Inglaterra ===> Inglaterra
-EEUU 2 - 5 Finlandia ===> Finlandia
-Suecia 6 - 1 Islas Feroe ===> Suecia
-España 9 - 3 Alemania ===> España
+Finlandia 1 - 6 Suecia ===> Suecia
+Japón 7 - 6 EEUU ===> Japón
+Holanda 4 - 5 Alemania ===> Alemania
+Inglaterra 5 - 6 Jamaica ===> Jamaica
 
 ============
 semifinal
 ============
-Finlandia 1 - 9 Suecia ===> Suecia
-España 2 - 7 Inglaterra ===> Inglaterra
+Alemania 1 - 4 Suecia ===> Suecia
+Japón 3 - 2 Jamaica ===> Japón
 
 ============
 tercer y cuarto puesto
 ============
-España 2 - 9 Finlandia ===> Finlandia
+Jamaica 8 - 9 Alemania ===> Alemania
 
 ============
 final
 ============
-Suecia 5 - 9 Inglaterra ===> Inglaterra
+Suecia 2 - 4 Japón ===> Japón
 
- Inglaterra campeón del mundo !!!!!!
+ Japón campeón del mundo !!!!!!
 ``` 
